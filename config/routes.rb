@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   root             'static_pages#home'
   get 'help'    => 'static_pages#help'
+  post 'team_player'    => 'static_pages#team_player'
   get 'about'   => 'static_pages#about'
   get 'contact' => 'static_pages#contact'
   get 'signup'  => 'users#new'
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :microposts,          only: [:create, :destroy]
-  resources :relationships,       only: [:create, :destroy]
   
+  get 'zero'  => 'matches#zero'
+
 end

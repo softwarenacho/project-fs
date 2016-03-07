@@ -1,0 +1,6 @@
+<h1><%= @match.local_goals %> - <%= @match.visitor_goals %> </h1>
+
+<% @match.events.each do |e| %>
+  <%= e %>
+  <br>
+<% end %>

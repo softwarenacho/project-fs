@@ -1,41 +1,120 @@
+<% provide(:title, 'Home') %>
+
 <% if logged_in? %>
 
-  <div class="row">
-    
-    <aside class="col-md-4">
-      <section class="user_info">
-        <%= render 'shared/user_info' %>
-      </section>
-      <section class="stats">
-        <%= render 'shared/stats' %>
-      </section>
-      <section class="micropost_form">
-        <%= render 'shared/micropost_form' %>
-      </section>
-    </aside>
 
-    <div class="col-md-8">
-      <h3>Micropost Feed</h3>
-      <%= render 'shared/feed' %>
-    </div>
+  <h1>Here you will select your players</h1>
 
-  </div>
+  <% if @current_team.length > 0 %>
+      <% offense = [] %>
+      <% midfielder = [] %>
+      <% defense = [] %>
+      <% gk = [] %>
+      <% @current_team.each do |p| %>
+        <% position = p.position %>
+        <% case position %>
+          <% when "OFF" %>
+            <% offense << p %>
+          <% when "MID" %>
+            <% midfielder << p %>
+          <% when "DEF" %>
+            <% defense << p %>
+          <% when "GK" %>
+            <% gk << p %>
+        <% end %>
+      <% end %>
+      <h2>Offensive:</h2>
+      <h3><% offense.each do |p| %>
+        <%= Player.find_by(fifa_id: p.player_id).name %>
+      <% end %></h3>
+      <h2>Midfielders:</h2><h3>
+      <% midfielder.each do |p| %>
+        <%= Player.find_by(fifa_id: p.player_id).name %>
+      <% end %></h3>
+      <h2>Defensive:</h2>
+      <h3><%= defense.each do |p| %>
+        <%= Player.find_by(fifa_id: p.player_id).name %>
+      <% end %></h3>
+      <h2>Goalkeeper:</h2><h3><%= gk.each do |p| %>
+        <%= Player.find_by(fifa_id: p.player_id).name %>
+      <% end %></h3>
+  <% end %>
+
+
+  <%= link_to "ZERO MATCH!", zero_path, class: "btn btn-lg btn-primary" %>
+  <form id="player_list" method="post" action="/">
+    <input type="submit" value="SAVE TEAM">
+    <input type="numeric" name="team" id="team_number">
+  <table>
+    <%= will_paginate %>
+    <thead>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>FIFA ID</th>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Rating</th>
+      <th>Value</th>
+      <th>Pac</th>
+      <th>Sho</th>
+      <th>Pas</th>
+      <th>Dri</th>
+      <th>Def</th>
+      <th>Phy</th>
+      <th>check</th>
+    </thead>
+    <tbody>
+      <% @static_pages.each do |p| %>
+        <tr>
+          <td><img src="<%= p.avatar %>" alt="<%= p.name %>" title="<%= p.name %>" height="50px"></td>
+          <td><img src="<%= p.nation_img %>" alt="<%= p.nation %>" title="<%= p.nation %>"width="30px"></td>
+          <td><img src="<%= p.club_img %>" alt="<%= p.club %>" title="<%= p.club %>" height="30px"></td>
+          <td><%= p.fifa_id %></td>
+          <td><span title="<%= p.first_name %> <%= p.last_name %>"><%= p.name %></span></td>
+          <td><%= p.position %></td>
+          <td><%= p.rating %></td>
+          <% value = p.market_value/1000000.0 %>
+          <% if value < 1 %>
+            <% value = value * 1000 %>
+            <% string_value = "€ #{value}K" %>
+          <% else %>
+            <% string_value = "€ #{value}M" %>
+          <% end %>
+          <td><%= string_value %></td>
+          <td><%= p.g_pacing %></td>
+          <td><%= p.g_shooting %></td>
+          <td><%= p.g_passing %></td>
+          <td><%= p.g_dribbling %></td>
+          <td><%= p.g_defense %></td>
+          <td><%= p.g_physical %></td>
+          <td>
+            <input type="checkbox" class="messageCheckbox" name="players" value="<%= p.fifa_id %>">
+            <input type="hidden" name="position" value="<%= p.position %>">
+            <input type="hidden" name="market_value" value="<%= p.market_value %>">
+          </td>
+        </tr>
+      <% end %>
+    </tbody>   
+  </table>
+</form>
 
 <% else %>
 
   <div class="center jumbotron">
-    <h1>Welcome to the Sample App</h1>
+    <h1>Welcome to PROJECT FS</h1>
+    <br><br>
 
-    <h2>
-      This is the home page for the
-      <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-      sample application.
-    </h2>
+    <p>Hey, Welcome to Fantasy Football Masters!!! <br><br><br>
+
+      In this game you can create the football team of your dreams and use it to compete against your friends and other users. Your initial budget for recruiting players is limited, so choose wisely! As you win matches your budget will grow and you can pick better and better players to join your team. Remember that all matches are based on real life stats so keep yourself updated with our Stats and News Feed features. <br><br><br>
+
+      Make the right choices and become a Fantasy Football Master! Good luck!  </p>
+
+      <br><br>
 
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-  </div>
 
-  <%= link_to image_tag("rails.png", alt: "Rails logo"),
-              'http://rubyonrails.org/' %>
+  </div>
 
 <% end %>
