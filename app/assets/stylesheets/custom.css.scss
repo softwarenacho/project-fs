@@ -3,7 +3,7 @@
 
 /* mixins, variables, etc. */
 
-$gray-medium-light: #eaeaea;
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -22,6 +22,8 @@ $display-type: 'Graduate';
 
 $lightness: #fff;
 $main_color: #39937B;
+$gray-medium-light: #eaeaea;
+$dark-color: #245C4D;
 
 body,
 html {
@@ -123,7 +125,20 @@ body {
 .players_show{
   margin-left: 500px;
 }
-
+.btn {
+  background-color: $dark_color;
+  border: $dark_color;
+}
+.btn:hover {
+  background-color: $main_color;
+  border: $main_color;
+}
+thead th {
+  text-align: center;
+}
+td {
+  padding: 0 10px;
+}
 #budget_text, #user_budget{
   display: inline-block;
   margin-left: 20px;
@@ -135,7 +150,10 @@ body {
   overflow-y: scroll;
   display: inline-block;
   float: left;
-  margin-right: 20px;
+  border-radius: 8px;
+  border: 1px solid #2C6E5C;
+  padding: 20px;
+  margin-right: 50px;
 }
 
 .animated{

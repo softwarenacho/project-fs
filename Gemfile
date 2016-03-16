@@ -22,6 +22,7 @@ gem 'pg',             '0.17.1'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'gon'
+gem 'pg_search'
 
 group :development, :test do
   gem 'byebug',      '3.4.0'
