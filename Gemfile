@@ -15,8 +15,6 @@ gem 'sdoc',         '0.4.0', group: :doc
 gem 'json'
 gem 'nokogiri'
 gem 'pg',             '0.17.1'
-gem 'omniauth'
-gem 'omniauth-facebook'
 gem 'gon'
 gem 'pg_search'
 

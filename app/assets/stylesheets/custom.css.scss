@@ -140,8 +140,12 @@ thead th {
 td {
   padding: 0 12px;
 }
-td :nth-child(6) {
-  background-color: red;
+.highlighted {
+  background-color: lighten($main_color, 20%);
+}
+h3 {
+  font-family: $display-type;
+  font-weight: 900;
 }
 #budget_text, #user_budget{
   display: inline-block;
