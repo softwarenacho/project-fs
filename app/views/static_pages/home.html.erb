@@ -6,17 +6,17 @@
   <h1>Here you can select your players:</h1>
 
   <div class="userselection">
-    <%= render 'static_pages/myplayers' %> 
-  </div> 
-      
+    <%= render 'static_pages/myplayers' %>
+  </div>
+
 
   <div class="players_show">
-    <%= link_to "ALL", "#"%>
+    <!-- <%= link_to "ALL", "#"%>
     <%= link_to "GK", "#"%>
     <%= link_to "DEF", "#"%>
     <%= link_to "MID", "#"%>
-    <%= link_to "OFF", "#"%>
-    
+    <%= link_to "OFF", "#"%> -->
+
     <table>
       <thead>
         <th></th>
@@ -34,11 +34,11 @@
         <th>Phy</th>
         <th></th>
       </thead>
-      <%= render 'static_pages/players' %>   
+      <%= render 'static_pages/players' %>
     </table>
 
     <%= will_paginate @players %>
-  </div>  
+  </div>
 <% else %>
 
   <div class="center jumbotron">

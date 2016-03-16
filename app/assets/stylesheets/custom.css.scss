@@ -119,11 +119,17 @@ body {
 
 .userselection {
   position: fixed;
-  float: left;
+  margin-left: -70px;
 }
 
 .players_show{
-  margin-left: 500px;
+  margin-left: 450px;
+  border-left: 1px black solid;
+}
+tbody :nth-child(7) {
+  min-width: 80px;
+  padding:0;
+  text-align: center;
 }
 .btn {
   background-color: $dark_color;
@@ -143,7 +149,7 @@ td {
 .highlighted {
   background-color: lighten($main_color, 20%);
 }
-h3 {
+h3, h1 {
   font-family: $display-type;
   font-weight: 900;
 }
