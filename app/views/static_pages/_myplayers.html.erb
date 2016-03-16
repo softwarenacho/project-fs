@@ -1,0 +1,52 @@
+<% budget = @user.budget %>
+
+<div class="myteam">
+
+    <table>
+      <thead>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Name</th>
+        <th>Pos</th>
+        <th>Rat</th>
+        <th>Val</th>
+        <th></th>
+      </thead>
+
+      <tbody id="myplayers">
+        <% unless @myplayers == nil %>
+        <% @myplayers.each do |p| %>
+          <tr id="myplayer_<%= p.fifa_id %>">
+            <td><img src="<%= p.avatar %>" alt="<%= p.name %>" title="<%= p.name %>" height="50px"></td>
+            <td><img src="<%= p.nation_img %>" alt="<%= p.nation %>" title="<%= p.nation %>"width="30px"></td>
+            <td><img src="<%= p.club_img %>" alt="<%= p.club %>" title="<%= p.club %>" height="30px"></td>
+            <td><span title="<%= p.first_name %> <%= p.last_name %>"><%= p.name %></span></td>
+            <td><%= p.position %></td>
+            <td><%= p.rating %></td>
+            <% value = (p.market_value/1000000.0*100).round/100.0 %>
+            <% if value < 1 %>
+              <% value = value * 1000 %>
+              <% string_value = "€ #{value} K" %>
+            <% else %>
+              <% string_value = "€ #{value} M" %>
+            <% end %>
+            <td><%= string_value %></td>
+            <td>
+              <%= link_to "Delete", delete_player_path(id: p.fifa_id), remote: true %>
+            </td>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+<% budget = (budget/1000000.0*100).round/100.0 %>
+<% if budget < 1 %>
+  <% budget = budget * 1000 %>
+  <% string_budget = "€ #{budget} K" %>
+<% else %>
+  <% string_budget = "€ #{budget} M" %>
+<% end %>
+
+<div><h3 id="budget_text">Budget: </h3><h3 id="user_budget"><%= string_budget %></h3></div>

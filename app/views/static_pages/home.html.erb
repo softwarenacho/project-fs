@@ -1,104 +1,44 @@
-<% provide(:title, 'Home') %>
+<% provide(:title, 'Recruit') %>
 
 <% if logged_in? %>
+  <% @user = current_user %>
 
+  <h1>Here you can select your players:</h1>
 
-  <h1>Here you will select your players</h1>
+  <div class="userselection">
+    <%= render 'static_pages/myplayers' %> 
+  </div> 
+      
 
-  <% if @current_team.length > 0 %>
-      <% offense = [] %>
-      <% midfielder = [] %>
-      <% defense = [] %>
-      <% gk = [] %>
-      <% @current_team.each do |p| %>
-        <% position = p.position %>
-        <% case position %>
-          <% when "OFF" %>
-            <% offense << p %>
-          <% when "MID" %>
-            <% midfielder << p %>
-          <% when "DEF" %>
-            <% defense << p %>
-          <% when "GK" %>
-            <% gk << p %>
-        <% end %>
-      <% end %>
-      <h2>Offensive:</h2>
-      <h3><% offense.each do |p| %>
-        <%= Player.find_by(fifa_id: p.player_id).name %>
-      <% end %></h3>
-      <h2>Midfielders:</h2><h3>
-      <% midfielder.each do |p| %>
-        <%= Player.find_by(fifa_id: p.player_id).name %>
-      <% end %></h3>
-      <h2>Defensive:</h2>
-      <h3><%= defense.each do |p| %>
-        <%= Player.find_by(fifa_id: p.player_id).name %>
-      <% end %></h3>
-      <h2>Goalkeeper:</h2><h3><%= gk.each do |p| %>
-        <%= Player.find_by(fifa_id: p.player_id).name %>
-      <% end %></h3>
-  <% end %>
+  <div class="players_show">
+    <%= link_to "ALL", "#"%>
+    <%= link_to "GK", "#"%>
+    <%= link_to "DEF", "#"%>
+    <%= link_to "MID", "#"%>
+    <%= link_to "OFF", "#"%>
+    
+    <table>
+      <thead>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Name</th>
+        <th>Pos</th>
+        <th>Rat</th>
+        <th>Val</th>
+        <th>Pac</th>
+        <th>Sho</th>
+        <th>Pas</th>
+        <th>Dri</th>
+        <th>Def</th>
+        <th>Phy</th>
+        <th></th>
+      </thead>
+      <%= render 'static_pages/players' %>   
+    </table>
 
-
-  <%= link_to "ZERO MATCH!", zero_path, class: "btn btn-lg btn-primary" %>
-  <form id="player_list" method="post" action="/">
-    <input type="submit" value="SAVE TEAM">
-    <input type="numeric" name="team" id="team_number">
-  <table>
-    <%= will_paginate %>
-    <thead>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th>FIFA ID</th>
-      <th>Name</th>
-      <th>Position</th>
-      <th>Rating</th>
-      <th>Value</th>
-      <th>Pac</th>
-      <th>Sho</th>
-      <th>Pas</th>
-      <th>Dri</th>
-      <th>Def</th>
-      <th>Phy</th>
-      <th>check</th>
-    </thead>
-    <tbody>
-      <% @static_pages.each do |p| %>
-        <tr>
-          <td><img src="<%= p.avatar %>" alt="<%= p.name %>" title="<%= p.name %>" height="50px"></td>
-          <td><img src="<%= p.nation_img %>" alt="<%= p.nation %>" title="<%= p.nation %>"width="30px"></td>
-          <td><img src="<%= p.club_img %>" alt="<%= p.club %>" title="<%= p.club %>" height="30px"></td>
-          <td><%= p.fifa_id %></td>
-          <td><span title="<%= p.first_name %> <%= p.last_name %>"><%= p.name %></span></td>
-          <td><%= p.position %></td>
-          <td><%= p.rating %></td>
-          <% value = p.market_value/1000000.0 %>
-          <% if value < 1 %>
-            <% value = value * 1000 %>
-            <% string_value = "€ #{value}K" %>
-          <% else %>
-            <% string_value = "€ #{value}M" %>
-          <% end %>
-          <td><%= string_value %></td>
-          <td><%= p.g_pacing %></td>
-          <td><%= p.g_shooting %></td>
-          <td><%= p.g_passing %></td>
-          <td><%= p.g_dribbling %></td>
-          <td><%= p.g_defense %></td>
-          <td><%= p.g_physical %></td>
-          <td>
-            <input type="checkbox" class="messageCheckbox" name="players" value="<%= p.fifa_id %>">
-            <input type="hidden" name="position" value="<%= p.position %>">
-            <input type="hidden" name="market_value" value="<%= p.market_value %>">
-          </td>
-        </tr>
-      <% end %>
-    </tbody>   
-  </table>
-</form>
-
+    <%= will_paginate @players %>
+  </div>  
 <% else %>
 
   <div class="center jumbotron">
@@ -116,5 +56,5 @@
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
 
   </div>
-
+<br>
 <% end %>

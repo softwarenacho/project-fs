@@ -2,20 +2,23 @@ class StaticPagesController < ApplicationController
   
   def home
     if logged_in?
-      @current_team = TeamPlayer.where(team_id: 3)
-      @static_pages = Player.paginate(page: params[:page]).order(market_value: :desc)
+      team = TeamPlayer.where(team_id: current_user.id)
+      unless team.empty?
+        gk = team.find {|p| p.position == "GK"}
+        if gk == nil
+          team = team.sort {|a,b| a.position <=> b.position}
+        else
+          team = team.sort {|a,b| a.position <=> b.position}
+          team = team.unshift(gk).uniq
+        end
+        @myplayers = []
+        team.each do |p|
+          id = p.player_id
+          @myplayers << Player.find_by(fifa_id: id)
+        end
+      end
+      @players = Player.paginate(:page => params[:page], :per_page => 25).order(rating: :desc)
     end
-  end
-
-  def team_player
-    puts "FUNCIONA"
-    players = params[:players]
-    team = params[:team]
-    players.each do |p|
-      p = Player.find_by(fifa_id: p.to_i)
-      TeamPlayer.create(player_id: p.fifa_id, team_id: team, position: p.position)
-    end
-    redirect_to root_url
   end
 
   def help

@@ -5,6 +5,9 @@ class SessionsController < ApplicationController
   end
 
    def create
+    # render :text => request.env['omniauth.auth'].inspect
+    # user = User.from_omniauth(env["omniauth.auth"])
+    # session[:user_id] = user.id
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       if user.activated?

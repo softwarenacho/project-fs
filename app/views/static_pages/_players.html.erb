@@ -1,0 +1,29 @@
+<tbody id="allplayers">
+  <% @players.each do |p| %>
+    <tr>
+      <td><img src="<%= p.avatar %>" alt="<%= p.name %>" title="<%= p.name %>" height="50px"></td>
+      <td><img src="<%= p.nation_img %>" alt="<%= p.nation %>" title="<%= p.nation %>"width="30px"></td>
+      <td><img src="<%= p.club_img %>" alt="<%= p.club %>" title="<%= p.club %>" height="30px"></td>
+      <td><span title="<%= p.first_name %> <%= p.last_name %>"><%= p.name %></span></td>
+      <td><%= p.position %></td>
+      <td><%= p.rating %></td>
+      <% value = (p.market_value/1000000.0*100).round/100.0 %>
+      <% if value < 1 %>
+        <% value = value * 1000 %>
+        <% string_value = "€ #{value} K" %>
+      <% else %>
+        <% string_value = "€ #{value} M" %>
+      <% end %>
+      <td><%= string_value %></td>
+      <td><%= p.g_pacing %></td>
+      <td><%= p.g_shooting %></td>
+      <td><%= p.g_passing %></td>
+      <td><%= p.g_dribbling %></td>
+      <td><%= p.g_defense %></td>
+      <td><%= p.g_physical %></td>
+      <td>
+        <%= link_to "Add", add_player_path(id: p.fifa_id), remote: true %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>

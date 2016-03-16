@@ -1,0 +1,12 @@
+if ("<%= @saved %>" == "saved"){
+  $('#myplayers').append("<%= j render('players/player', p: @player) %>");
+  $('#user_budget').html("<%= @string_value %>");
+} else if ("<%= @saved %>" == "budget") {
+  alert("Your budget is not enough");
+} else if ("<%= @saved %>" == "exist"){
+  alert("Player already on your team");
+} else if ("<%= @saved %>" == "11"){
+  alert("You can't add more than 11 players");
+} else if ("<%= @saved %>" == "GK"){
+  alert("You can't add 2 goalkeepers");
+}

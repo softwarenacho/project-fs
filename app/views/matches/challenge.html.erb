@@ -1,0 +1,172 @@
+<% l_gk = [] %>
+<% l_defense = [] %>
+<% l_midfield = [] %>
+<% l_offense = [] %>
+<% v_gk = [] %>
+<% v_defense = [] %>
+<% v_midfield = [] %>
+<% v_offense = [] %>
+
+<% @local.each do |p| %>
+  <% player = p %>
+  <% position = p[0].position %>
+  <% case position %>
+    <% when "GK" %>
+      <% l_gk << player %>
+    <% when "DEF" %>
+      <% l_defense << player %>
+    <% when "MID" %>
+      <% l_midfield << player %>
+    <% when "OFF" %>
+      <% l_offense << player %>
+  <% end %>
+<% end %>
+
+<% @visitor.each do |p| %>
+  <% player = p %>
+  <% position = p[0].position %>
+  <% case position %>
+    <% when "GK" %>
+      <% v_gk << player %>
+    <% when "DEF" %>
+      <% v_defense << player %>
+    <% when "MID" %>
+      <% v_midfield << player %>
+    <% when "OFF" %>
+      <% v_offense << player %>
+  <% end %>
+<% end %>
+
+<% provide(:title, 'Match') %>
+
+<h1 class="score"><%= @local_user.name %>  <span id="local_score">0</span> - <span id="visitor_score">0</span> <%= @visitor_user.name %></h1>
+
+<div class="indications">
+  <div class="clock"><h2>0'</h2></div>
+</div>
+
+<div id="event_text"><h3></h3></div>
+
+<div id="game_area">
+  <div id="featured_events"></div>
+
+  <div class = "matchfield">
+
+    <div id="gk_local"><%= image_tag("#{l_gk[0][0].avatar}", class: "ball")%><%= l_gk[0][0].name %></div>
+    <div id="gk_visitor"><%= image_tag("#{v_gk[0][0].avatar}", class: "ball")%><%= v_gk[0][0].name %></div>
+
+    
+    
+    <div class="animated">
+      <div id="animated_player"></div>
+      <%= image_tag("ball.png", class: "ball")%>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="two_column">
+  <div class="local_player">
+    <h3><%= @local_user.name %>' players</h3>
+    <div class="positions">
+      <h3>Goalkeeper:</h3>
+      <br>
+      <span>
+        <% l_gk.each do |p| %>
+        <img src="<%= p[0].avatar %>" alt="<%= p[0].name %>" title="<%= p[0].name %>" height="50px" class="position_show"><br>
+        <span class="position_avatar"><%= p[0].name %></span>
+        <% end %>
+      </span>
+    </div>
+    <div class="positions">
+      <h3>Defense:</h3>
+      <br>
+      <span>
+        <% l_defense.each do |p| %>
+        <div class="position_show">
+          <img src="<%= p[0].avatar %>" alt="<%= p[0].name %>" title="<%= p[0].name %>" height="50px" class="position_show"><br>
+          <span class="position_avatar"><%= p[0].name %></span>
+        </div>
+        <% end %>
+      </span>
+    </div>
+    <div class="positions">
+      <h3>Midfielders:</h3>
+      <br>
+      <span>
+        <% l_midfield.each do |p| %>
+        <div class="position_show">
+          <img src="<%= p[0].avatar %>" alt="<%= p[0].name %>" title="<%= p[0].name %>" height="50px" class="position_show"><br>
+          <span class="position_avatar"><%= p[0].name %></span>
+        </div>
+        <% end %>
+      </span>
+    </div>
+    <div class="positions">
+      <h3>Offense:</h3>
+      <br>
+      <span>
+        <% l_offense.each do |p| %>
+        <div class="position_show">
+          <img src="<%= p[0].avatar %>" alt="<%= p[0].name %>" title="<%= p[0].name %>" height="50px" class="position_avatar"><br>
+          <span class="position_show"><%= p[0].name %></span>
+        </div>
+        <% end %>
+      </span>
+    </div>
+  </div>
+
+  <div class="visitor_player">
+    <h3><%= @visitor_user.name %>' players</h3>
+    <div class="positions">
+      <h3>Goalkeeper:</h3>
+      <br>
+      <span>
+        <% v_gk.each do |p| %>
+        <img src="<%= p[0].avatar %>" alt="<%= p[0].name %>" title="<%= p[0].name %>" height="50px" class="position_show"><br>
+        <span class="position_show"><%= p[0].name %></span>
+        <% end %>
+      </span>
+    </div>
+    <div class="positions">
+      <h3>Defense:</h3>
+      <br>
+      <span>
+        <% v_defense.each do |p| %>
+        <div class="position_show">
+        <img src="<%= p[0].avatar %>" alt="<%= p[0].name %>" title="<%= p[0].name %>" height="50px" class="position_show"><br>
+        <span class="position_show"><%= p[0].name %></span>
+        </div>
+        <% end %>
+      </span>
+    </div>
+    <div class="positions">
+      <h3>Midfielders:</h3>
+      <br>
+      <span>
+        <% v_midfield.each do |p| %>
+        <div class="position_show">
+          <img src="<%= p[0].avatar %>" alt="<%= p[0].name %>" title="<%= p[0].name %>" height="50px" class="position_show"><br>
+          <span class="position_show"><%= p[0].name %></span>
+        </div>
+        <% end %>
+      </span>
+    </div>
+    <div class="positions">
+      <h3>Offense:</h3>
+      <br>
+      <span>
+        <% v_offense.each do |p| %>
+        <div class="position_show">
+          <img src="<%= p[0].avatar %>" alt="<%= p[0].name %>" title="<%= p[0].name %>" height="50px" class="position_show"><br>
+          <span class="position_show"><%= p[0].name %></span>
+        </div>
+        <% end %>
+      </span>
+    </div>
+  </div>
+</div>
+
+<br>
+  <%= @local_user.name %> <%= @match.local_goals %> - <%= @match.visitor_goals %> <%= @visitor_user.name %>

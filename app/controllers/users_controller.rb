@@ -11,6 +11,21 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @team = TeamPlayer.where(team_id: params[:id])
+    unless @team.empty?
+      gk = @team.find {|p| p.position == "GK"}
+        if gk == nil
+          @team = @team.sort {|a,b| a.position <=> b.position}
+        else
+          @team = @team.sort {|a,b| a.position <=> b.position}
+          @team = @team.unshift(gk).uniq
+        end
+      @players = []
+      @team.each do |p|
+        id = p.player_id
+        @players << Player.find_by(fifa_id: id)
+      end
+    end
   end
 
   def new
@@ -26,6 +41,12 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+    
+    # user = User.from_omniauth(env["omniauth.auth"])
+    # session[:user_id] = user.id
+    # redirect_to root_url
+    
+    
   end
 
   def edit

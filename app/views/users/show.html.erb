@@ -7,8 +7,76 @@
         <%= @user.name %>
       </h1>
     </section>
+    <% myteam = TeamPlayer.where(team_id: current_user.id) %>
+    <% mygkcheck = myteam.select {|p| p.position == "GK" }  %>
+    <% gkcheck = @team.select {|p| p.position == "GK" }  %>
+    <% unless (current_user.id == @user.id) || (@team.length != 11) || (myteam.length != 11) || (gkcheck.empty?) || (mygkcheck.empty?) %>
+      <%= link_to "Challenge", challenge_path(players: [current_user.id, @user.id]), method: :post, class: "btn btn-lg btn-primary" %>
+    <% end %>
+    <% unless (current_user.id == @user.id) %>
+      <% if (@team.length != 11) %>
+        <h3 style="color: red">This user can't be challenged because this team doesn't have 11 players</h3>
+      <% end %>
+      <% if (myteam.length != 11) %>
+        <h3 style="color: red">You can't challenge because your team doesn't have 11 players</h3>
+      <% end %>
+      <% if (gkcheck.empty?) %>
+        <h3 style="color: red">This user can't be challenged because this team doesn't have a goalkeeper</h3>
+      <% end %>
+      <% if (mygkcheck.empty?) %>
+        <h3 style="color: red">You can't challenge because your team doesn't have a goalkeeper</h3>
+      <% end %>
+    <% end %>
   </aside>
   <div class="col-md-8">
-    <h3>CONTENT SOON</h3>
+    <% if @players %>
+        <h3>My team </h3>
+        <table>
+        <thead>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Rating</th>
+          <th>Value</th>
+          <th>Pac</th>
+          <th>Sho</th>
+          <th>Pas</th>
+          <th>Dri</th>
+          <th>Def</th>
+          <th>Phy</th>
+        </thead>
+        <tbody>
+          <% @players.each do |p| %>
+            <tr>
+              <td><img src="<%= p.avatar %>" alt="<%= p.name %>" title="<%= p.name %>" height="50px"></td>
+              <td><img src="<%= p.nation_img %>" alt="<%= p.nation %>" title="<%= p.nation %>"width="30px"></td>
+              <td><img src="<%= p.club_img %>" alt="<%= p.club %>" title="<%= p.club %>" height="30px"></td>
+              <td><span title="<%= p.first_name %> <%= p.last_name %>"><%= p.name %></span></td>
+              <td><%= p.position %></td>
+              <td><%= p.rating %></td>
+              <% value = p.market_value/1000000.0 %>
+              <% if value < 1 %>
+                <% value = value * 1000 %>
+                <% string_value = "€ #{value}K" %>
+              <% else %>
+                <% string_value = "€ #{value}M" %>
+              <% end %>
+              <td><%= string_value %></td>
+              <td><%= p.g_pacing %></td>
+              <td><%= p.g_shooting %></td>
+              <td><%= p.g_passing %></td>
+              <td><%= p.g_dribbling %></td>
+              <td><%= p.g_defense %></td>
+              <td><%= p.g_physical %></td>
+            </tr>
+          <% end %>
+        </tbody>   
+      </table>
+    <% else %>
+      <h3>You don't have any players yet</h3>
+    <% end %>
   </div>
 </div>
+<br>

@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.integer :score
-      t.integer :budget
+      t.integer :budget, default: 100000000 
       t.integer :level
       t.timestamps null: false
     end

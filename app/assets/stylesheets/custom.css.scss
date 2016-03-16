@@ -11,10 +11,210 @@ $gray-medium-light: #eaeaea;
   box-sizing:         border-box;
 }
 
+/* MARIANA CSS */
+
+
+@font-face {
+  font-family: 'Graduate';
+  src: font-url('Graduate-Regular.ttf');
+}
+$display-type: 'Graduate';
+
+$lightness: #fff;
+$main_color: #39937B;
+
+body,
+html {
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: arial;
+}
+::-webkit-scrollbar { width: 2px;  }/* for vertical scrollbars */
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.5); }
+
+@media (min-width: 1200px) {
+    .container { width: 1100px }
+}
+
+/* Navigation */
+#tf-menu {
+    margin-bottom: 0;
+    background-color: darken($main_color, 15%);
+    padding: 10px 0;
+    height: auto;
+}
+.navbar-brand {
+  padding: 0 20px;
+  height: 70px;
+}
+.navbar-default {
+  background-image: url('back-header.svg');
+  border-bottom: 4px solid darken($main_color, 25%);
+}
+.navbar-nav {
+  padding-top: 25px;
+}
+.navbar-nav > li > a {
+    font-size: 15px;
+    font-family: $display-type;
+    font-weight: 700;
+    border-bottom: 2px solid transparent;
+    padding: 5px 5px;
+    margin: 0 10px;
+    text-transform: uppercase;
+    transition: all 0.5s;
+}
+.navbar-default .navbar-nav > li > a {
+  color: lighten($main_color, 30%);
+}
+.navbar-default .navbar-nav > li > a.active,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: $lightness;
+    border-bottom: 4px solid $lightness;
+}
+.navbar-default .navbar-toggle { border-color: transparent }
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus { background-color: transparent }
+.navbar-default .navbar-toggle:hover>.navbar-default .navbar-toggle .icon-bar,
+.navbar-default .navbar-toggle:focus>.navbar-default .navbar-toggle .icon-bar { color: $main_color }
+
 /* universal */
 
 body {
-  padding-top: 60px;
+  margin-top: 100px;
+}
+
+.score{
+  margin-top: 75px;
+}
+
+.position_show{
+  display: inline-block;
+}
+
+.position_avatar{
+  margin: 0 auto;
+}
+
+.two_column {
+  -webkit-column-count: 2;
+  column-count: 2;
+  margin: 0 auto;
+  clear: both;  
+}
+
+#myplayers th, #myplayers td, #allplayers th, #allplayers td{
+  padding-right: 10px;
+}
+
+.positions{
+  text-align: center;
+}
+
+.userselection {
+  position: fixed;
+  float: left;
+}
+
+.players_show{
+  margin-left: 500px;
+}
+
+#budget_text, #user_budget{
+  display: inline-block;
+  margin-left: 20px;
+}
+
+#featured_events{
+  width: 300px;
+  height: 400px;
+  overflow-y: scroll;
+  display: inline-block;
+  float: left;
+  margin-right: 20px;
+}
+
+.animated{
+  width: 60px;
+  height: 150px;
+  position: relative;
+  top: 100px;
+  left: 320px;
+}
+
+#event_text{
+  text-align: center;
+  font-weight: bold;
+  height: 80px;
+}
+
+#gk_local{
+  margin: 0;
+  width: 55px;
+  height: 55px;
+  position: relative;
+  top: 150px;
+  display: none;
+}
+
+#gk_visitor{
+  margin: 0;
+  width: 55px;
+  height: 55px;
+  position: relative;
+  left: 640px;
+  top: 150px;
+  display: none;
+}
+
+.indication{
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.myteam{
+  width: 450px;
+  height: 600px;
+  margin: 0 auto;
+  margin: 10px;
+}
+
+.goal_img, .red_img, .yellow_img, .freekick_img, .doubleyellow_img, .penalty_img{
+  height: 50px;
+}
+
+.avatar{
+  width: 55px;
+}
+
+.ball {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.indications{
+  text-align: center;
+}
+
+.clock{
+  display: inline-block;
+}
+
+.matchfield {
+  background-image: url("field.png");
+  background-size: 700px 400px;
+  width: 700px;
+  height: 400px;
+  margin: 0 auto;
+  display: inline_block;
+  float: left;
 }
 
 section {
@@ -46,7 +246,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 2em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
@@ -239,52 +439,5 @@ input {
     overflow: auto;
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
-  }
-}
-
-/* microposts */
-
-.microposts {
-  list-style: none;
-  padding: 0;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-  .user {
-    margin-top: 5em;
-    padding-top: 0;
-  }
-  .content {
-    display: block;
-    margin-left: 60px;
-    img {
-      display: block;
-      padding: 5px 0;
-    }
-  }
-  .timestamp {
-    color: $gray-light;
-    display: block;
-    margin-left: 60px;
-  }
-  .gravatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
-  }
-}
-
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
-  }
-}
-
-span.picture {
-  margin-top: 10px;
-  input {
-    border: 0;
   }
 }
