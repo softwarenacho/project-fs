@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # post 'team_player'    => 'static_pages#team_player'
   get 'about'   => 'static_pages#about'
   get 'contact' => 'static_pages#contact'
+  get 'database' => 'static_pages#database'
   get 'signup'  => 'users#new'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

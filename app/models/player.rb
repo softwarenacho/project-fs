@@ -1,5 +1,6 @@
 class Player < ActiveRecord::Base
   has_many :TeamPlayers
+  validates :fifa_id, uniqueness: true
 
   # include PgSearch
   # pg_search_scope :search, 

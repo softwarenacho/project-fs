@@ -12,7 +12,7 @@ $(function(){
     var events = gon.events;
     var counter = animation.length;
     var local_id = gon.local;
-    var speed = 1000;
+    var speed = 20;
     for (var i = 0; i < counter; i++) {
       time = animation[i][0];
       name = animation[i][1];
