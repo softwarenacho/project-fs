@@ -42,7 +42,7 @@ class StaticPagesController < ApplicationController
     def new_page(page)
       #URI JUGADORES
       #uri = URI("https://www.easports.com/uk/fifa/ultimate-team/api/fut/item?jsonParamObject=%7B%22page%22:#{page},%22quality%22:%22bronze,silver,gold,rare_bronze,rare_silver,rare_gold%22,%22club%22:%221%22,%22position%22:%22GK,LF,CF,RF,ST,LW,LM,CAM,CDM,CM,RM,RW,LWB,LB,CB,RB,RWB%22%7D")
-      uri = URI("https://www.easports.com/fifa/ultimate-team/api/fut/item?jsonParamObject=%7B%22page%22:#{page},%22country%22:%2283%22,%22quality%22:%22bronze,silver,gold,rare_bronze,rare_silver,rare_gold%22,%22position%22:%22GK,LF,CF,RF,ST,LW,LM,CAM,CDM,CM,RM,RW,LWB,LB,CB,RB,RWB%22%7D")
+      uri = URI("https://www.easports.com/fifa/ultimate-team/api/fut/item?jsonParamObject=%7B%22page%22:#{page},%22quality%22:%22bronze,silver,gold,rare_bronze,rare_silver,rare_gold%22,%22position%22:%22GK,LF,CF,RF,ST,LW,LM,CAM,CDM,CM,RM,RW,LWB,LB,CB,RB,RWB%22%7D")
       get = Net::HTTP.get(uri)
       File.open("input.json","w+") do |f|
           f.puts get
