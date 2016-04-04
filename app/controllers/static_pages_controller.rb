@@ -155,19 +155,22 @@ class StaticPagesController < ApplicationController
     p.club = player["club"]["abbrName"]
     p.club_img = player["club"]["imageUrls"]["normal"]["large"]
 
-    html_doc = Nokogiri::HTML(open("http://sofifa.com/player/#{p.fifa_id}"))
-    value = html_doc.search(".pl > li:nth-child(10) > span").inner_text
-    value[0] = ""
-    value[0] = ""
-    if value[value.length-1] == "M"
-      value[value.length-1] = ""
-      value = value.to_f
-      value = value * 1000000
-    elsif value[value.length-1] == "K"
-      value[value.length-1] = ""
-      value = value.to_f
-      value = value * 1000
-    end
+    # html_doc = Nokogiri::HTML(open("http://sofifa.com/player/#{p.fifa_id}"))
+    # value = html_doc.search(".pl > li:nth-child(10) > span").inner_text
+    # value[0] = ""
+    # value[0] = ""
+    # if value[value.length-1] == "M"
+    #   value[value.length-1] = ""
+    #   value = value.to_f
+    #   value = value * 1000000
+    # elsif value[value.length-1] == "K"
+    #   value[value.length-1] = ""
+    #   value = value.to_f
+    #   value = value * 1000
+    # end
+    # p.market_value = value
+
+    #TEMPORARY WORK AROUND FOR MARKET VALUE
     p.market_value = value
 
     # club_sofifa = html_doc.search(".pl:nth-child(2) > li:nth-child(1) > a").inner_text
