@@ -17,7 +17,7 @@ class StaticPagesController < ApplicationController
           @myplayers << Player.find_by(fifa_id: id)
         end
       end
-      @players = Player.where(nation: "Mexico").paginate(:page => params[:page], :per_page => 25).order(rating: :desc)
+      @players = Player.paginate(:page => params[:page], :per_page => 25).order(rating: :desc)
     end
   end
 
