@@ -171,7 +171,7 @@ class StaticPagesController < ApplicationController
     # p.market_value = value
 
     #TEMPORARY WORK AROUND FOR MARKET VALUE
-    p.market_value = value
+    p.market_value = 5000000
 
     # club_sofifa = html_doc.search(".pl:nth-child(2) > li:nth-child(1) > a").inner_text
     # puts "*"*50
