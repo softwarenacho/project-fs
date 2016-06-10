@@ -5,7 +5,6 @@ class Match < ActiveRecord::Base
 
   attr_accessor :events, :animation, :local_goals, :visitor_goals
 
-  # [Player{sbds},stats, Player{fsdv}...],[Player{sbds}, Player{fsdv}...]
   def initialize(local, visitor)
     @time = 0
     @field = 5 #position in field

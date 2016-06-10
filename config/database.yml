@@ -4,5 +4,3 @@ development:
   database: players_development
   pool: 5
   timeout: 5000
-  username: admin
-  password: jugo404
