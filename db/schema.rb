@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20160307165745) do
     t.integer "age"
     t.integer "fifa_id"
     t.integer "rating"
-    t.integer "market_value"
+    t.integer "market_value",      default: 10000
     t.string  "avatar"
     t.string  "league"
     t.string  "nation"

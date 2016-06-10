@@ -11,7 +11,7 @@ class CreatePlayers < ActiveRecord::Migration
       p.integer "rating"
 
       #GET THIS DATA
-      p.integer "market_value"
+      p.integer "market_value", default: 10000
 
       # DATOS ILUSTRATIVOS
       p.string "avatar"

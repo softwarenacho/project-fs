@@ -14,3 +14,6 @@ input.json
 
 # Ignore .DS_Store, OS X generated file
 .DS_Store
+
+# Ignore Gemfile.lock
+Gemfile.lock
