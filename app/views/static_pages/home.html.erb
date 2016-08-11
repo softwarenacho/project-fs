@@ -3,7 +3,7 @@
 <% if logged_in? %>
   <% @user = current_user %>
 
-  <h1>Here you can select your players:</h1>
+  <h1 style="position:fixed; width: 500px; margin-left: -60px;">Here you can select your players:</h1>
 
   <div class="userselection">
     <%= render 'static_pages/myplayers' %>
@@ -39,6 +39,8 @@
 
     <%= will_paginate @players %>
   </div>
+
+
 <% else %>
 
   <div class="center jumbotron">
