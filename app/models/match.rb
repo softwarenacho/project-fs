@@ -1,4 +1,4 @@
-# https://prezi.com/gj48v60uiuy_/edit/#23_30863873
+
 class Match < ActiveRecord::Base
   belongs_to :local, class_name: 'Team', foreign_key: 'local_id'
   belongs_to :visitor, class_name: 'Team', foreign_key: 'visitor_id'
@@ -54,7 +54,6 @@ class Match < ActiveRecord::Base
       @time += 1
     end
     
-
     @d_hash = prob_team(dt)
     @o_hash = prob_team(ot)
     

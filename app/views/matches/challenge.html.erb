@@ -39,6 +39,7 @@
 
 <% provide(:title, 'Match') %>
 
+<div><%= gravatar_for @local_user, size: 100 %></div>  <span> vs </span> <div> <%= gravatar_for @visitor_user, size: 100 %></div> 
 <h1 class="score"><%= @local_user.name %>  <span id="local_score">0</span> - <span id="visitor_score">0</span> <%= @visitor_user.name %></h1>
 
 <div class="indications">
